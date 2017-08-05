@@ -13,26 +13,6 @@ Processing scripts
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Create BEM surfaces using flash images. ">
-
-.. only:: html
-
-    .. figure:: /auto_scripts/images/thumb/sphx_glr_11-make_flash_thumb.png
-
-        :ref:`sphx_glr_auto_scripts_11-make_flash.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_scripts/11-make_flash
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="Source estimates are computed for contrast between faces and scrambled and morphed to average b...">
 
 .. only:: html
@@ -73,26 +53,6 @@ Processing scripts
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="The events are extracted from stimulus channel 'STI101'. The events are saved to the subject's ...">
-
-.. only:: html
-
-    .. figure:: /auto_scripts/images/thumb/sphx_glr_03-run_extract_events_thumb.png
-
-        :ref:`sphx_glr_auto_scripts_03-run_extract_events.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_scripts/03-run_extract_events
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="Compute LCMV beamformer. ">
 
 .. only:: html
@@ -110,6 +70,26 @@ Processing scripts
    :hidden:
 
    /auto_scripts/15-lcmv_beamformer
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The events are extracted from stimulus channel 'STI101'. The events are saved to the subject's ...">
+
+.. only:: html
+
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_03-run_extract_events_thumb.png
+
+        :ref:`sphx_glr_auto_scripts_03-run_extract_events.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_scripts/03-run_extract_events
 
 .. raw:: html
 
