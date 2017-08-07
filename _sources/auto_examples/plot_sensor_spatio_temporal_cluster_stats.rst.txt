@@ -424,7 +424,7 @@ Visualize the spatio-temporal clusters
 
 
 
-**Total running time of the script:** ( 0 minutes  20.946 seconds)
+**Total running time of the script:** ( 0 minutes  17.042 seconds)
 
 
 

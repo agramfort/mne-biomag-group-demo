@@ -153,26 +153,6 @@ Processing scripts
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Compute inverse solution for each evoked data set. ">
-
-.. only:: html
-
-    .. figure:: /auto_scripts/images/thumb/sphx_glr_13-make_inverse_thumb.png
-
-        :ref:`sphx_glr_auto_scripts_13-make_inverse.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_scripts/13-make_inverse
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="Calculate forward solution for MEG channels. ">
 
 .. only:: html
@@ -190,6 +170,26 @@ Processing scripts
    :hidden:
 
    /auto_scripts/12-make_forward
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Compute inverse solution for each evoked data set. ">
+
+.. only:: html
+
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_13-make_inverse_thumb.png
+
+        :ref:`sphx_glr_auto_scripts_13-make_inverse.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_scripts/13-make_inverse
 
 .. raw:: html
 

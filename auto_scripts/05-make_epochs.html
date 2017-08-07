@@ -221,7 +221,7 @@ a factor of 2.</p>
             <span class="n">ecg_epochs</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.create_ecg_epochs.html#mne.preprocessing.create_ecg_epochs" title="View documentation for mne.preprocessing.create_ecg_epochs"><span class="n">create_ecg_epochs</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">tmin</span><span class="o">=-.</span><span class="mi">5</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
             <span class="n">ecg_inds</span><span class="p">,</span> <span class="n">scores_ecg</span> <span class="o">=</span> <span class="n">ica</span><span class="o">.</span><span class="n">find_bads_ecg</span><span class="p">(</span><span class="n">ecg_epochs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;ctps&#39;</span><span class="p">,</span>
                                                      <span class="n">threshold</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-            <span class="n">ica</span><span class="o">.</span><span class="n">exclude</span> <span class="o">+=</span> <span class="n">ecg_inds</span><span class="p">[:</span><span class="n">n_max_ecg</span><span class="p">]</span>
+            <span class="n">ica</span><span class="o">.</span><span class="n">exclude</span> <span class="o">=</span> <span class="n">ecg_inds</span><span class="p">[:</span><span class="n">n_max_ecg</span><span class="p">]</span>
             <span class="n">ica</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">ica_name</span><span class="p">)</span>
             <span class="n">ica</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">epochs</span><span class="p">)</span>
         <span class="k">del</span> <span class="n">raw</span>
@@ -263,7 +263,7 @@ a factor of 2.</p>
       
     </p>
     <p>
-        &copy; Copyright 2017, MNE Developers. Last updated on 2017-08-05.<br/>
+        &copy; Copyright 2017, MNE Developers. Last updated on 2017-08-07.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.<br/>
     </p>
   </div>
