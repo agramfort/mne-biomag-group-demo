@@ -207,7 +207,7 @@ and highpass filters in MNE versions 0.12 and 0.16.
     Filter length of 341 samples (0.310 sec) selected
 
 
-**Total running time of the script:** ( 0 minutes  2.375 seconds)
+**Total running time of the script:** ( 0 minutes  1.732 seconds)
 
 
 

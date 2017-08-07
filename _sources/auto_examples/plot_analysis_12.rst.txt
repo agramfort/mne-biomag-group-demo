@@ -690,7 +690,7 @@ BEM
     Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub012/bem/outer_skin.surf
 
 
-**Total running time of the script:** ( 2 minutes  3.298 seconds)
+**Total running time of the script:** ( 2 minutes  39.750 seconds)
 
 
 

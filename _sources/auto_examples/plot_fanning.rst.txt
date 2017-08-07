@@ -152,7 +152,7 @@ visible (see above) and the "fanning" has disappeared.
     0 projection items activated
 
 
-**Total running time of the script:** ( 0 minutes  48.505 seconds)
+**Total running time of the script:** ( 0 minutes  38.462 seconds)
 
 
 

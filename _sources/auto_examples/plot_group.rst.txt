@@ -271,7 +271,7 @@ LCMV beamformer
     colormap: fmin=2.82e-01 fmid=3.11e-01 fmax=3.67e-01 transparent=1
 
 
-**Total running time of the script:** ( 0 minutes  15.455 seconds)
+**Total running time of the script:** ( 0 minutes  52.335 seconds)
 
 
 
