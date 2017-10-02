@@ -398,7 +398,7 @@ Covariance :ref:`sphx_glr_auto_scripts_06-make_evoked.py`.
     Not doing PCA for EEG.
 
 
-**Total running time of the script:** ( 1 minutes  14.552 seconds)
+**Total running time of the script:** ( 1 minutes  12.185 seconds)
 
 
 

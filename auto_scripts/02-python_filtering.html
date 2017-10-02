@@ -126,6 +126,7 @@ directory.</p>
 <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
 
 <span class="kn">import</span> <span class="nn">mne</span>
+<span class="kn">from</span> <span class="nn">mne</span> <span class="kn">import</span> <a href="http://mne-tools.github.io/stable/generated/mne.pick_types.html#mne.pick_types" title="View documentation for mne.pick_types"><span class="n">pick_types</span></a>
 <span class="kn">from</span> <span class="nn">mne.parallel</span> <span class="kn">import</span> <span class="n">parallel_func</span>
 
 <span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">study_path</span><span class="p">,</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">N_JOBS</span><span class="p">,</span> <span class="n">l_freq</span>
@@ -167,6 +168,11 @@ directory.</p>
                    <span class="n">h_trans_bandwidth</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">filter_length</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
                    <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span> <span class="n">fir_window</span><span class="o">=</span><span class="s1">&#39;hann&#39;</span><span class="p">,</span>
                    <span class="n">fir_design</span><span class="o">=</span><span class="s1">&#39;firwin&#39;</span><span class="p">)</span>
+        <span class="c1"># high-pass eog channel to get reasonable thresholds in autoreject</span>
+        <span class="n">picks_eog</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.pick_types.html#mne.pick_types" title="View documentation for mne.pick_types"><span class="n">pick_types</span></a><span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">meg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">eog</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">l_freq</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">picks</span><span class="o">=</span><span class="n">picks_eog</span><span class="p">,</span> <span class="n">l_trans_bandwidth</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+                   <span class="n">filter_length</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span> <span class="n">fir_window</span><span class="o">=</span><span class="s1">&#39;hann&#39;</span><span class="p">,</span>
+                   <span class="n">fir_design</span><span class="o">=</span><span class="s1">&#39;firwin&#39;</span><span class="p">)</span>
         <span class="n">raw_out</span> <span class="o">=</span> <span class="n">raw_fname_out</span> <span class="o">%</span> <span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">l_freq</span><span class="p">)</span>
         <span class="n">raw</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">raw_out</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
@@ -197,7 +203,7 @@ directory.</p>
       
     </p>
     <p>
-        &copy; Copyright 2017, MNE Developers. Last updated on 2017-08-07.<br/>
+        &copy; Copyright 2017, MNE Developers. Last updated on 2017-10-02.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.<br/>
     </p>
   </div>

@@ -226,7 +226,7 @@ Next, the linear scale to check power line frequency
     Effective window size : 1.862 (s)
 
 
-**Total running time of the script:** ( 0 minutes  16.209 seconds)
+**Total running time of the script:** ( 0 minutes  15.373 seconds)
 
 
 

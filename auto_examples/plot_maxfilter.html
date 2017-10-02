@@ -141,7 +141,7 @@
 
 <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;bads&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bads</span>
 <span class="n">picks</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.pick_types.html#mne.pick_types" title="View documentation for mne.pick_types"><span class="n">mne</span><span class="o">.</span><span class="n">pick_types</span></a><span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">meg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="s1">&#39;bads&#39;</span><span class="p">)</span>
-<span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="o">**</span><span class="n">filter_params</span><span class="p">)</span>
+<span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="o">**</span><span class="n">filter_params</span><span class="p">)</span>
 
 <span class="n">events</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.find_events.html#mne.find_events" title="View documentation for mne.find_events"><span class="n">mne</span><span class="o">.</span><span class="n">find_events</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">stim_channel</span><span class="o">=</span><span class="s1">&#39;STI101&#39;</span><span class="p">,</span> <span class="n">consecutive</span><span class="o">=</span><span class="s1">&#39;increasing&#39;</span><span class="p">,</span>
                          <span class="n">mask</span><span class="o">=</span><span class="mi">4352</span><span class="p">,</span> <span class="n">mask_type</span><span class="o">=</span><span class="s1">&#39;not_and&#39;</span><span class="p">,</span> <span class="n">min_duration</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span>
@@ -164,9 +164,9 @@
 <span class="n">Ready</span><span class="o">.</span>
 <span class="n">Current</span> <span class="n">compensation</span> <span class="n">grade</span> <span class="p">:</span> <span class="mi">0</span>
 <span class="n">Reading</span> <span class="mi">0</span> <span class="o">...</span> <span class="mi">546699</span>  <span class="o">=</span>      <span class="mf">0.000</span> <span class="o">...</span>   <span class="mf">496.999</span> <span class="n">secs</span><span class="o">...</span>
-<span class="n">Setting</span> <span class="n">up</span> <span class="n">low</span><span class="o">-</span><span class="k">pass</span> <span class="nb">filter</span> <span class="n">at</span> <span class="mi">40</span> <span class="n">Hz</span>
+<span class="n">Setting</span> <span class="n">up</span> <span class="n">band</span><span class="o">-</span><span class="k">pass</span> <span class="nb">filter</span> <span class="kn">from</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">40</span> <span class="n">Hz</span>
 <span class="n">h_trans_bandwidth</span> <span class="n">chosen</span> <span class="n">to</span> <span class="n">be</span> <span class="mf">10.0</span> <span class="n">Hz</span>
-<span class="n">Filter</span> <span class="n">length</span> <span class="n">of</span> <span class="mi">341</span> <span class="n">samples</span> <span class="p">(</span><span class="mf">0.310</span> <span class="n">sec</span><span class="p">)</span> <span class="n">selected</span>
+<span class="n">Filter</span> <span class="n">length</span> <span class="n">of</span> <span class="mi">6820</span> <span class="n">samples</span> <span class="p">(</span><span class="mf">6.200</span> <span class="n">sec</span><span class="p">)</span> <span class="n">selected</span>
 <span class="mi">148</span> <span class="n">events</span> <span class="n">found</span>
 <span class="n">Events</span> <span class="nb">id</span><span class="p">:</span> <span class="p">[</span> <span class="mi">5</span>  <span class="mi">6</span>  <span class="mi">7</span> <span class="mi">13</span> <span class="mi">14</span> <span class="mi">15</span> <span class="mi">17</span> <span class="mi">18</span> <span class="mi">19</span><span class="p">]</span>
 <span class="mi">50</span> <span class="n">matching</span> <span class="n">events</span> <span class="n">found</span>
@@ -180,10 +180,10 @@
 <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;bads&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bads</span>
 <span class="n">raw_sss</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;bads&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bads</span>
 
-<span class="n">raw</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.maxwell_filter.html#mne.preprocessing.maxwell_filter" title="View documentation for mne.preprocessing.maxwell_filter"><span class="n">maxwell_filter</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">calibration</span><span class="o">=</span><span class="n">cal</span><span class="p">,</span> <span class="n">cross_talk</span><span class="o">=</span><span class="n">ctc</span><span class="p">,</span> <span class="n">st_duration</span><span class="o">=</span><span class="mf">10.</span><span class="p">)</span>
+<span class="n">raw</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.maxwell_filter.html#mne.preprocessing.maxwell_filter" title="View documentation for mne.preprocessing.maxwell_filter"><span class="n">maxwell_filter</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">calibration</span><span class="o">=</span><span class="n">cal</span><span class="p">,</span> <span class="n">cross_talk</span><span class="o">=</span><span class="n">ctc</span><span class="p">,</span> <span class="n">st_duration</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 
-<span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="o">**</span><span class="n">filter_params</span><span class="p">)</span>
-<span class="n">raw_sss</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="o">**</span><span class="n">filter_params</span><span class="p">)</span>
+<span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="o">**</span><span class="n">filter_params</span><span class="p">)</span>
+<span class="n">raw_sss</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="o">**</span><span class="n">filter_params</span><span class="p">)</span>
 
 <span class="n">evoked_after</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.Epochs.html#mne.Epochs" title="View documentation for mne.Epochs"><span class="n">Epochs</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">event_id</span><span class="o">=</span><span class="n">event_ids</span><span class="p">,</span> <span class="n">picks</span><span class="o">=</span><span class="n">picks</span><span class="p">)</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
 <span class="n">evoked_sss</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.Epochs.html#mne.Epochs" title="View documentation for mne.Epochs"><span class="n">Epochs</span></a><span class="p">(</span><span class="n">raw_sss</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">event_id</span><span class="o">=</span><span class="n">event_ids</span><span class="p">,</span> <span class="n">picks</span><span class="o">=</span><span class="n">picks</span><span class="p">)</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
@@ -221,67 +221,16 @@ Maxwell filtering raw data
 (X, Y) fit (1.5, 27.5) more than 20 mm from head frame origin
     Automatic origin fit: head of radius 83.1 mm
     Using origin 1.5, 27.5, 26.0 mm in the head frame
-    Processing data using tSSS with st_duration=10.0
-    Spatiotemporal window did not fit evenly into raw object. The final 17.00 seconds were lumped onto the previous window.
     Computing regularization
         Using 80/95 harmonic components for    0.000  (65/80 in, 15/15 out)
     Processing 49 data chunks of (at least) 10.0 sec
-        Projecting  1 intersecting tSSS components for    0.000 -    9.999 sec  (#1/49)
-        Projecting  1 intersecting tSSS components for   10.000 -   19.999 sec  (#2/49)
-        Projecting 11 intersecting tSSS components for   20.000 -   29.999 sec  (#3/49)
-        Projecting 11 intersecting tSSS components for   30.000 -   39.999 sec  (#4/49)
-        Projecting 11 intersecting tSSS components for   40.000 -   49.999 sec  (#5/49)
-        Projecting 11 intersecting tSSS components for   50.000 -   59.999 sec  (#6/49)
-        Projecting 11 intersecting tSSS components for   60.000 -   69.999 sec  (#7/49)
-        Projecting 11 intersecting tSSS components for   70.000 -   79.999 sec  (#8/49)
-        Projecting 11 intersecting tSSS components for   80.000 -   89.999 sec  (#9/49)
-        Projecting 11 intersecting tSSS components for   90.000 -   99.999 sec (#10/49)
-        Projecting 11 intersecting tSSS components for  100.000 -  109.999 sec (#11/49)
-        Projecting 11 intersecting tSSS components for  110.000 -  119.999 sec (#12/49)
-        Projecting 11 intersecting tSSS components for  120.000 -  129.999 sec (#13/49)
-        Projecting 11 intersecting tSSS components for  130.000 -  139.999 sec (#14/49)
-        Projecting 11 intersecting tSSS components for  140.000 -  149.999 sec (#15/49)
-        Projecting 11 intersecting tSSS components for  150.000 -  159.999 sec (#16/49)
-        Projecting 11 intersecting tSSS components for  160.000 -  169.999 sec (#17/49)
-        Projecting 11 intersecting tSSS components for  170.000 -  179.999 sec (#18/49)
-        Projecting 12 intersecting tSSS components for  180.000 -  189.999 sec (#19/49)
-        Projecting 12 intersecting tSSS components for  190.000 -  199.999 sec (#20/49)
-        Projecting 12 intersecting tSSS components for  200.000 -  209.999 sec (#21/49)
-        Projecting 11 intersecting tSSS components for  210.000 -  219.999 sec (#22/49)
-        Projecting 11 intersecting tSSS components for  220.000 -  229.999 sec (#23/49)
-        Projecting 11 intersecting tSSS components for  230.000 -  239.999 sec (#24/49)
-        Projecting 11 intersecting tSSS components for  240.000 -  249.999 sec (#25/49)
-        Projecting 11 intersecting tSSS components for  250.000 -  259.999 sec (#26/49)
-        Projecting 11 intersecting tSSS components for  260.000 -  269.999 sec (#27/49)
-        Projecting 11 intersecting tSSS components for  270.000 -  279.999 sec (#28/49)
-        Projecting 11 intersecting tSSS components for  280.000 -  289.999 sec (#29/49)
-        Projecting 11 intersecting tSSS components for  290.000 -  299.999 sec (#30/49)
-        Projecting 11 intersecting tSSS components for  300.000 -  309.999 sec (#31/49)
-        Projecting 11 intersecting tSSS components for  310.000 -  319.999 sec (#32/49)
-        Projecting 11 intersecting tSSS components for  320.000 -  329.999 sec (#33/49)
-        Projecting 11 intersecting tSSS components for  330.000 -  339.999 sec (#34/49)
-        Projecting 11 intersecting tSSS components for  340.000 -  349.999 sec (#35/49)
-        Projecting 11 intersecting tSSS components for  350.000 -  359.999 sec (#36/49)
-        Projecting 11 intersecting tSSS components for  360.000 -  369.999 sec (#37/49)
-        Projecting 11 intersecting tSSS components for  370.000 -  379.999 sec (#38/49)
-        Projecting 11 intersecting tSSS components for  380.000 -  389.999 sec (#39/49)
-        Projecting 11 intersecting tSSS components for  390.000 -  399.999 sec (#40/49)
-        Projecting 11 intersecting tSSS components for  400.000 -  409.999 sec (#41/49)
-        Projecting 11 intersecting tSSS components for  410.000 -  419.999 sec (#42/49)
-        Projecting 11 intersecting tSSS components for  420.000 -  429.999 sec (#43/49)
-        Projecting 11 intersecting tSSS components for  430.000 -  439.999 sec (#44/49)
-        Projecting 11 intersecting tSSS components for  440.000 -  449.999 sec (#45/49)
-        Projecting 11 intersecting tSSS components for  450.000 -  459.999 sec (#46/49)
-        Projecting 11 intersecting tSSS components for  460.000 -  469.999 sec (#47/49)
-        Projecting 11 intersecting tSSS components for  470.000 -  479.999 sec (#48/49)
-        Projecting 11 intersecting tSSS components for  480.000 -  496.999 sec (#49/49)
 [done]
-Setting up low-pass filter at 40 Hz
+Setting up band-pass filter from 1 - 40 Hz
 h_trans_bandwidth chosen to be 10.0 Hz
-Filter length of 341 samples (0.310 sec) selected
-Setting up low-pass filter at 40 Hz
+Filter length of 6820 samples (6.200 sec) selected
+Setting up band-pass filter from 1 - 40 Hz
 h_trans_bandwidth chosen to be 10.0 Hz
-Filter length of 341 samples (0.310 sec) selected
+Filter length of 6820 samples (6.200 sec) selected
 50 matching events found
 0 projection items activated
 50 matching events found
@@ -311,7 +260,7 @@ Filter length of 341 samples (0.310 sec) selected
 </pre></div>
 </div>
 <img alt="../_images/sphx_glr_plot_maxfilter_001.png" class="align-center" src="../_images/sphx_glr_plot_maxfilter_001.png" />
-<p><strong>Total running time of the script:</strong> ( 1 minutes  36.285 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 1 minutes  15.903 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_maxfilter.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_maxfilter.py</span></code></a></div>
@@ -333,7 +282,7 @@ Filter length of 341 samples (0.310 sec) selected
       
     </p>
     <p>
-        &copy; Copyright 2017, MNE Developers. Last updated on 2017-08-07.<br/>
+        &copy; Copyright 2017, MNE Developers. Last updated on 2017-10-02.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.<br/>
     </p>
   </div>

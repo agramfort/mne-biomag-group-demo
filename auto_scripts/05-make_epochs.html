@@ -123,12 +123,14 @@ containing blinks are rejected. ECG artifacts are corrected using ICA. Finally
 the epochs are saved to disk. To save space, the epoch data is decimated by
 a factor of 2.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="kn">import</span> <span class="nn">mne</span>
 <span class="kn">from</span> <span class="nn">mne.parallel</span> <span class="kn">import</span> <span class="n">parallel_func</span>
 <span class="kn">from</span> <span class="nn">mne.preprocessing</span> <span class="kn">import</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.create_ecg_epochs.html#mne.preprocessing.create_ecg_epochs" title="View documentation for mne.preprocessing.create_ecg_epochs"><span class="n">create_ecg_epochs</span></a><span class="p">,</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.read_ica.html#mne.preprocessing.read_ica" title="View documentation for mne.preprocessing.read_ica"><span class="n">read_ica</span></a>
+
+<span class="kn">from</span> <span class="nn">autoreject</span> <span class="kn">import</span> <span class="n">get_rejection_threshold</span>
 
 <span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">N_JOBS</span><span class="p">,</span> <span class="n">map_subjects</span><span class="p">,</span> <span class="n">l_freq</span>
 </pre></div>
@@ -147,8 +149,9 @@ a factor of 2.</p>
 <span class="p">}</span>
 
 <span class="n">tmin</span><span class="p">,</span> <span class="n">tmax</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span>
-<span class="n">reject</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">grad</span><span class="o">=</span><span class="mf">4000e-13</span><span class="p">,</span> <span class="n">mag</span><span class="o">=</span><span class="mf">4e-12</span><span class="p">)</span>
 <span class="n">baseline</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="n">tempdir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Now we define a function to extract epochs for one subject</p>
@@ -184,13 +187,6 @@ a factor of 2.</p>
 
         <span class="n">raw</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.io.Raw.html#mne.io.Raw" title="View documentation for mne.io.Raw"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Raw</span></a><span class="p">(</span><span class="n">run_fname</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-        <span class="n">eog_events</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.find_eog_events.html#mne.preprocessing.find_eog_events" title="View documentation for mne.preprocessing.find_eog_events"><span class="n">mne</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">find_eog_events</span></a><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
-        <span class="n">eog_events</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.25</span> <span class="o">*</span> <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sfreq&#39;</span><span class="p">])</span>
-        <span class="n">annotations</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.Annotations.html#mne.Annotations" title="View documentation for mne.Annotations"><span class="n">mne</span><span class="o">.</span><span class="n">Annotations</span></a><span class="p">(</span><span class="n">eog_events</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sfreq&#39;</span><span class="p">],</span>
-                                      <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.repeat.html#numpy.repeat" title="View documentation for numpy.repeat"><span class="n">np</span><span class="o">.</span><span class="n">repeat</span></a><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">eog_events</span><span class="p">)),</span>
-                                      <span class="s1">&#39;BAD_blink&#39;</span><span class="p">,</span> <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;meas_date&#39;</span><span class="p">])</span>
-        <span class="n">raw</span><span class="o">.</span><span class="n">annotations</span> <span class="o">=</span> <span class="n">annotations</span>  <span class="c1"># Remove epochs with blinks</span>
-
         <span class="n">delay</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.0345</span> <span class="o">*</span> <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sfreq&#39;</span><span class="p">])</span>
         <span class="n">events</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.read_events.html#mne.read_events" title="View documentation for mne.read_events"><span class="n">mne</span><span class="o">.</span><span class="n">read_events</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span>
                                          <span class="s1">&#39;run_</span><span class="si">%02d</span><span class="s1">_filt_sss-eve.fif&#39;</span> <span class="o">%</span> <span class="n">run</span><span class="p">))</span>
@@ -206,8 +202,16 @@ a factor of 2.</p>
 
         <span class="c1"># Read epochs</span>
         <span class="n">epochs</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.Epochs.html#mne.Epochs" title="View documentation for mne.Epochs"><span class="n">mne</span><span class="o">.</span><span class="n">Epochs</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">events_id</span><span class="p">,</span> <span class="n">tmin</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">proj</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                            <span class="n">picks</span><span class="o">=</span><span class="n">picks</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="n">baseline</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-                            <span class="n">decim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">reject</span><span class="o">=</span><span class="n">reject</span><span class="p">)</span>
+                            <span class="n">picks</span><span class="o">=</span><span class="n">picks</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="n">baseline</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                            <span class="n">decim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">reject</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+        <span class="n">reject</span> <span class="o">=</span> <span class="n">get_rejection_threshold</span><span class="p">(</span><span class="n">epochs</span><span class="p">)</span>
+        <span class="n">epochs</span><span class="o">.</span><span class="n">drop_bad</span><span class="p">(</span><span class="n">reject</span><span class="o">=</span><span class="n">reject</span><span class="p">)</span>
+        <span class="c1"># XXX: workaround for memory leak in MNE where a reference to</span>
+        <span class="c1"># raw object is kept in epochs. The downside is that it will</span>
+        <span class="c1"># lead to some loss in precision but we can live with it.</span>
+        <span class="n">temp_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tempdir</span><span class="p">,</span> <span class="s1">&#39;run_</span><span class="si">%d</span><span class="s1">.fif&#39;</span> <span class="o">%</span> <span class="n">run</span><span class="p">)</span>
+        <span class="n">epochs</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">temp_fname</span><span class="p">)</span>
+        <span class="n">epochs</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.read_epochs.html#mne.read_epochs" title="View documentation for mne.read_epochs"><span class="n">mne</span><span class="o">.</span><span class="n">read_epochs</span></a><span class="p">(</span><span class="n">temp_fname</span><span class="p">)</span>
 
         <span class="c1"># ICA</span>
         <span class="k">if</span> <span class="n">tsss</span><span class="p">:</span>
@@ -215,7 +219,6 @@ a factor of 2.</p>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">ica_name</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;run_</span><span class="si">%02d</span><span class="s1">-ica.fif&#39;</span> <span class="o">%</span> <span class="n">run</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">l_freq</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">epochs</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
             <span class="n">ica</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.read_ica.html#mne.preprocessing.read_ica" title="View documentation for mne.preprocessing.read_ica"><span class="n">read_ica</span></a><span class="p">(</span><span class="n">ica_name</span><span class="p">)</span>
             <span class="n">n_max_ecg</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># use max 3 components</span>
             <span class="n">ecg_epochs</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.create_ecg_epochs.html#mne.preprocessing.create_ecg_epochs" title="View documentation for mne.preprocessing.create_ecg_epochs"><span class="n">create_ecg_epochs</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">tmin</span><span class="o">=-.</span><span class="mi">5</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
@@ -263,7 +266,7 @@ a factor of 2.</p>
       
     </p>
     <p>
-        &copy; Copyright 2017, MNE Developers. Last updated on 2017-08-07.<br/>
+        &copy; Copyright 2017, MNE Developers. Last updated on 2017-10-02.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.<br/>
     </p>
   </div>

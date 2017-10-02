@@ -48,7 +48,7 @@ First the filtered raw data.
 
     raw.info['bads'] = bads
     picks = mne.pick_types(raw.info, meg=True, exclude='bads')
-    raw.filter(None, 40, **filter_params)
+    raw.filter(1., 40, **filter_params)
 
     events = mne.find_events(raw, stim_channel='STI101', consecutive='increasing',
                              mask=4352, mask_type='not_and', min_duration=0.003,
@@ -77,9 +77,9 @@ First the filtered raw data.
     Ready.
     Current compensation grade : 0
     Reading 0 ... 546699  =      0.000 ...   496.999 secs...
-    Setting up low-pass filter at 40 Hz
+    Setting up band-pass filter from 1 - 40 Hz
     h_trans_bandwidth chosen to be 10.0 Hz
-    Filter length of 341 samples (0.310 sec) selected
+    Filter length of 6820 samples (6.200 sec) selected
     148 events found
     Events id: [ 5  6  7 13 14 15 17 18 19]
     50 matching events found
@@ -98,10 +98,10 @@ Then Maxfiltered and SSS'd data.
     raw.info['bads'] = bads
     raw_sss.info['bads'] = bads
 
-    raw = maxwell_filter(raw, calibration=cal, cross_talk=ctc, st_duration=10.)
+    raw = maxwell_filter(raw, calibration=cal, cross_talk=ctc, st_duration=None)
 
-    raw.filter(None, 40, **filter_params)
-    raw_sss.filter(None, 40, **filter_params)
+    raw.filter(1., 40, **filter_params)
+    raw_sss.filter(1., 40, **filter_params)
 
     evoked_after = Epochs(raw, events, event_id=event_ids, picks=picks).average()
     evoked_sss = Epochs(raw_sss, events, event_id=event_ids, picks=picks).average()
@@ -145,67 +145,16 @@ Then Maxfiltered and SSS'd data.
     (X, Y) fit (1.5, 27.5) more than 20 mm from head frame origin
         Automatic origin fit: head of radius 83.1 mm
         Using origin 1.5, 27.5, 26.0 mm in the head frame
-        Processing data using tSSS with st_duration=10.0
-        Spatiotemporal window did not fit evenly into raw object. The final 17.00 seconds were lumped onto the previous window.
         Computing regularization
             Using 80/95 harmonic components for    0.000  (65/80 in, 15/15 out)
         Processing 49 data chunks of (at least) 10.0 sec
-            Projecting  1 intersecting tSSS components for    0.000 -    9.999 sec  (#1/49)
-            Projecting  1 intersecting tSSS components for   10.000 -   19.999 sec  (#2/49)
-            Projecting 11 intersecting tSSS components for   20.000 -   29.999 sec  (#3/49)
-            Projecting 11 intersecting tSSS components for   30.000 -   39.999 sec  (#4/49)
-            Projecting 11 intersecting tSSS components for   40.000 -   49.999 sec  (#5/49)
-            Projecting 11 intersecting tSSS components for   50.000 -   59.999 sec  (#6/49)
-            Projecting 11 intersecting tSSS components for   60.000 -   69.999 sec  (#7/49)
-            Projecting 11 intersecting tSSS components for   70.000 -   79.999 sec  (#8/49)
-            Projecting 11 intersecting tSSS components for   80.000 -   89.999 sec  (#9/49)
-            Projecting 11 intersecting tSSS components for   90.000 -   99.999 sec (#10/49)
-            Projecting 11 intersecting tSSS components for  100.000 -  109.999 sec (#11/49)
-            Projecting 11 intersecting tSSS components for  110.000 -  119.999 sec (#12/49)
-            Projecting 11 intersecting tSSS components for  120.000 -  129.999 sec (#13/49)
-            Projecting 11 intersecting tSSS components for  130.000 -  139.999 sec (#14/49)
-            Projecting 11 intersecting tSSS components for  140.000 -  149.999 sec (#15/49)
-            Projecting 11 intersecting tSSS components for  150.000 -  159.999 sec (#16/49)
-            Projecting 11 intersecting tSSS components for  160.000 -  169.999 sec (#17/49)
-            Projecting 11 intersecting tSSS components for  170.000 -  179.999 sec (#18/49)
-            Projecting 12 intersecting tSSS components for  180.000 -  189.999 sec (#19/49)
-            Projecting 12 intersecting tSSS components for  190.000 -  199.999 sec (#20/49)
-            Projecting 12 intersecting tSSS components for  200.000 -  209.999 sec (#21/49)
-            Projecting 11 intersecting tSSS components for  210.000 -  219.999 sec (#22/49)
-            Projecting 11 intersecting tSSS components for  220.000 -  229.999 sec (#23/49)
-            Projecting 11 intersecting tSSS components for  230.000 -  239.999 sec (#24/49)
-            Projecting 11 intersecting tSSS components for  240.000 -  249.999 sec (#25/49)
-            Projecting 11 intersecting tSSS components for  250.000 -  259.999 sec (#26/49)
-            Projecting 11 intersecting tSSS components for  260.000 -  269.999 sec (#27/49)
-            Projecting 11 intersecting tSSS components for  270.000 -  279.999 sec (#28/49)
-            Projecting 11 intersecting tSSS components for  280.000 -  289.999 sec (#29/49)
-            Projecting 11 intersecting tSSS components for  290.000 -  299.999 sec (#30/49)
-            Projecting 11 intersecting tSSS components for  300.000 -  309.999 sec (#31/49)
-            Projecting 11 intersecting tSSS components for  310.000 -  319.999 sec (#32/49)
-            Projecting 11 intersecting tSSS components for  320.000 -  329.999 sec (#33/49)
-            Projecting 11 intersecting tSSS components for  330.000 -  339.999 sec (#34/49)
-            Projecting 11 intersecting tSSS components for  340.000 -  349.999 sec (#35/49)
-            Projecting 11 intersecting tSSS components for  350.000 -  359.999 sec (#36/49)
-            Projecting 11 intersecting tSSS components for  360.000 -  369.999 sec (#37/49)
-            Projecting 11 intersecting tSSS components for  370.000 -  379.999 sec (#38/49)
-            Projecting 11 intersecting tSSS components for  380.000 -  389.999 sec (#39/49)
-            Projecting 11 intersecting tSSS components for  390.000 -  399.999 sec (#40/49)
-            Projecting 11 intersecting tSSS components for  400.000 -  409.999 sec (#41/49)
-            Projecting 11 intersecting tSSS components for  410.000 -  419.999 sec (#42/49)
-            Projecting 11 intersecting tSSS components for  420.000 -  429.999 sec (#43/49)
-            Projecting 11 intersecting tSSS components for  430.000 -  439.999 sec (#44/49)
-            Projecting 11 intersecting tSSS components for  440.000 -  449.999 sec (#45/49)
-            Projecting 11 intersecting tSSS components for  450.000 -  459.999 sec (#46/49)
-            Projecting 11 intersecting tSSS components for  460.000 -  469.999 sec (#47/49)
-            Projecting 11 intersecting tSSS components for  470.000 -  479.999 sec (#48/49)
-            Projecting 11 intersecting tSSS components for  480.000 -  496.999 sec (#49/49)
     [done]
-    Setting up low-pass filter at 40 Hz
+    Setting up band-pass filter from 1 - 40 Hz
     h_trans_bandwidth chosen to be 10.0 Hz
-    Filter length of 341 samples (0.310 sec) selected
-    Setting up low-pass filter at 40 Hz
+    Filter length of 6820 samples (6.200 sec) selected
+    Setting up band-pass filter from 1 - 40 Hz
     h_trans_bandwidth chosen to be 10.0 Hz
-    Filter length of 341 samples (0.310 sec) selected
+    Filter length of 6820 samples (6.200 sec) selected
     50 matching events found
     0 projection items activated
     50 matching events found
@@ -246,7 +195,7 @@ Plotting
 
 
 
-**Total running time of the script:** ( 1 minutes  36.285 seconds)
+**Total running time of the script:** ( 1 minutes  15.903 seconds)
 
 
 

@@ -123,7 +123,9 @@ Epochs :ref:`sphx_glr_auto_scripts_05-make_epochs.py`.
     fig = mne.viz.plot_events(events, show=False)
     fig.suptitle('Events from run 01')
 
-    epochs = mne.read_epochs(op.join(meg_dir, subject, subject + '-epo.fif'))
+    data_path = op.join(meg_dir, subject)
+    epochs = mne.read_epochs(op.join(data_path, '%s_highpass-%sHz-epo.fif'
+                             % (subject, l_freq)))
     epochs.plot_drop_log()
 
 
@@ -147,15 +149,15 @@ Epochs :ref:`sphx_glr_auto_scripts_05-make_epochs.py`.
 
  Out::
 
-    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub011/sub011-epo.fif ...
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub011/sub011_highpass-1Hz-epo.fif ...
         Read a total of 1 projection items:
             Average EEG reference (1 x 70) active
         Found the data of interest:
             t =    -200.00 ...     800.00 ms
             0 CTF compensation matrices available
-    801 matching events found
+    633 matching events found
     Created an SSP operator (subspace dimension = 1)
-    801 matching events found
+    633 matching events found
     Created an SSP operator (subspace dimension = 1)
     1 projection items activated
 
@@ -166,7 +168,7 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
 
 .. code-block:: python
 
-    evo_fname = op.join(meg_dir, subject, '%s-ave.fif' % subject)
+    evo_fname = op.join(data_path, '%s_highpass-%sHz_ave.fif' % (subject, l_freq))
     evoked = mne.read_evokeds(evo_fname)
 
 
@@ -177,13 +179,14 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
 
  Out::
 
-    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub011/sub011-ave.fif ...
+    This filename (/tsi/doctorants/data_gramfort/dgw_faces/MEG/sub011/sub011_highpass-1Hz_ave.fif) does not conform to MNE naming conventions. All evoked files should end with -ave.fif or -ave.fif.gz
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub011/sub011_highpass-1Hz_ave.fif ...
         Read a total of 1 projection items:
             Average EEG reference (1 x 70) active
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (famous)
             0 CTF compensation matrices available
-            nave = 263 - aspect type = 100
+            nave = 203 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
         Read a total of 1 projection items:
@@ -191,7 +194,7 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (scrambled)
             0 CTF compensation matrices available
-            nave = 266 - aspect type = 100
+            nave = 211 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
         Read a total of 1 projection items:
@@ -199,7 +202,7 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (unfamiliar)
             0 CTF compensation matrices available
-            nave = 272 - aspect type = 100
+            nave = 219 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
         Read a total of 1 projection items:
@@ -207,7 +210,7 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (contrast)
             0 CTF compensation matrices available
-            nave = 178 - aspect type = 100
+            nave = 141 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
         Read a total of 1 projection items:
@@ -215,7 +218,7 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 535 - aspect type = 100
+            nave = 422 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
 
@@ -559,7 +562,7 @@ Faces :ref:`sphx_glr_auto_scripts_13-make_inverse.py`.
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=6.29e+00 fmid=7.66e+00 fmax=2.03e+01 transparent=1
+    colormap: fmin=5.50e+00 fmid=6.65e+00 fmax=1.73e+01 transparent=1
     Updating smoothing matrix, be patient..
     Smoothing matrix creation, step 1
     Smoothing matrix creation, step 2
@@ -571,7 +574,7 @@ Faces :ref:`sphx_glr_auto_scripts_13-make_inverse.py`.
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=6.29e+00 fmid=7.66e+00 fmax=2.03e+01 transparent=1
+    colormap: fmin=5.50e+00 fmid=6.65e+00 fmax=1.73e+01 transparent=1
 
 
 Faces - scrambled
@@ -604,7 +607,7 @@ Faces - scrambled
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=2.22e+00 fmid=2.54e+00 fmax=8.07e+00 transparent=1
+    colormap: fmin=2.14e+00 fmid=2.44e+00 fmax=7.11e+00 transparent=1
     Updating smoothing matrix, be patient..
     Smoothing matrix creation, step 1
     Smoothing matrix creation, step 2
@@ -616,7 +619,7 @@ Faces - scrambled
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=2.22e+00 fmid=2.54e+00 fmax=8.07e+00 transparent=1
+    colormap: fmin=2.14e+00 fmid=2.44e+00 fmax=7.11e+00 transparent=1
 
 
 LCMV Faces - scrambled
@@ -690,7 +693,7 @@ BEM
     Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub011/bem/outer_skin.surf
 
 
-**Total running time of the script:** ( 2 minutes  43.436 seconds)
+**Total running time of the script:** ( 2 minutes  42.372 seconds)
 
 
 

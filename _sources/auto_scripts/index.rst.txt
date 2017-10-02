@@ -193,26 +193,6 @@ Processing scripts
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="The data are bandpass filtered (1 - 40 Hz) using linear-phase fir filter with delay compensatio...">
-
-.. only:: html
-
-    .. figure:: /auto_scripts/images/thumb/sphx_glr_02-python_filtering_thumb.png
-
-        :ref:`sphx_glr_auto_scripts_02-python_filtering.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_scripts/02-python_filtering
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="Time decoding fits a Logistic Regression model for every time point in the epoch. In this examp...">
 
 .. only:: html
@@ -230,6 +210,26 @@ Processing scripts
    :hidden:
 
    /auto_scripts/08-run_time_decoding
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The data are bandpass filtered (1 - 40 Hz) using linear-phase fir filter with delay compensatio...">
+
+.. only:: html
+
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_02-python_filtering_thumb.png
+
+        :ref:`sphx_glr_auto_scripts_02-python_filtering.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_scripts/02-python_filtering
 
 .. raw:: html
 

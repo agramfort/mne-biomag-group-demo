@@ -49,7 +49,6 @@ The evoked data is saved using categories 'famous', 'scrambled', 'unfamiliar',
         contrast = mne.combine_evoked([evoked_famous, evoked_unfamiliar,
                                        evoked_scrambled], weights=[0.5, 0.5, -1.])
         contrast.comment = 'contrast'
-        sdfdf
         faces = mne.combine_evoked([evoked_famous, evoked_unfamiliar], 'nave')
         faces.comment = 'faces'
 
